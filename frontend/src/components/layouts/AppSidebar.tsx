@@ -8,6 +8,7 @@ const AppSidebar = () => {
       </div>
       <div>
         <ul>
+          {/* Add Sidebar content Design & Add Data */}
           <li className="text-center"><Link to="#">Settings</Link></li>
         </ul>
       </div>
