@@ -12,7 +12,7 @@ const AppOutlet = ({ }: IAppOutletProps) => {
     <div className="w-full h-full">
       <AppHeader />
       <AppSidebar />
-      <main className="w-full h-full p-2 mt-10 lg:pl-44 bg-gray-500 text-white">
+      <main className="w-full min-h-full p-2 pt-16 lg:pl-44 bg-gray-500 text-white ">
         <Outlet />
       </main>
     </div>
