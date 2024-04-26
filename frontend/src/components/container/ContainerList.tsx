@@ -1,30 +1,16 @@
-import { useEffect, useState } from "react";
-
-import { ContainerList as ServiceContainerList } from "../../../wailsjs/go/services/containerService";
-import { types } from "../../../wailsjs/go/models";
-
+import React from "react";
 import Skeleton from "../Skeleton";
 
-const ContainerList = () => {
-  const [containerDataList, setContainerDataList] = useState<
-    types.ContainerSummary[]
-  >([]);
+import { types } from "../../../wailsjs/go/models";
 
-  // 페이지 랜더링 최초 시에 컨테이너 목록 조회
-  useEffect(() => {
-    getServiceContainerList();
-  }, []);
+interface IContainerListProps extends React.HTMLAttributes<HTMLDivElement> {
+  containerList: types.ContainerSummary[]
+}
 
-  // 컨테이너 목록 조회 후 데이터를 저장하는 함수
-  const getServiceContainerList = async () => {
-    await ServiceContainerList().then((res) => {
-      setContainerDataList(res);
-    });
-  };
-
+const ContainerList = ({ containerList }: IContainerListProps) => {
   return (
-    containerDataList &&
-    containerDataList.length > 0 ? (
+    containerList &&
+    containerList.length > 0 ? (
       <div className="w-full mx-auto">
         <table>
           <thead className="border">
@@ -50,7 +36,7 @@ const ContainerList = () => {
             </tr>
           </thead>
           <tbody>
-            {containerDataList.map((containerData, index) => (
+            {containerList.map((containerData, index) => (
               <tr key={index}>
                 <td className="p-2 text-center border">
                   {containerData.Id.slice(0, 13)}
