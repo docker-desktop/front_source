@@ -1,6 +1,8 @@
 module changeme
 
-go 1.20
+go 1.21
+
+toolchain go1.22.0
 
 require (
 	github.com/docker-desktop/GoDockerInfoFetcher v0.0.0-20240418121736-c4dab6ff09bb
