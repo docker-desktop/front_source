@@ -18,10 +18,15 @@ const ContainerListPage = () => {
     getServiceContainerList();
   }, []);
 
-  // 컨테이너 목록 조회 후 데이터를 저장하는 함수
+  // Set ContainerDataList State Ddata Handle
+  const SetContainerDataState = (contianerData: types.ContainerSummary[]): void => {
+    setContainerDataList(() => contianerData)
+  }
+
+  // Get Contianer Data List
   const getServiceContainerList = async () => {
     await ServiceContainerList().then((res) => {
-      setContainerDataList(res);
+      SetContainerDataState(res)
     });
   };
 
