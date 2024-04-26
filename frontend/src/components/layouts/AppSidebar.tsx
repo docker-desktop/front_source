@@ -1,12 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 
 import { SidebarList } from "../../constants/sidebar";
+import Badge from "../Badge";
 
 const AppSidebar = () => {
   const location = useLocation()
-
-  console.log(location.pathname);
-  
 
   return (
     <div className="hidden lg:flex fixed left-0 top-0 w-40 h-full p-2 flex-col items-center bg-gray-700 text-white">
