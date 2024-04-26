@@ -2,6 +2,7 @@ import React from "react";
 import Skeleton from "../Skeleton";
 
 import { types } from "../../../wailsjs/go/models";
+import { SummaryContainerFields } from "../../constants/container";
 
 interface IContainerListProps extends React.HTMLAttributes<HTMLDivElement> {
   containerList: types.ContainerSummary[]
@@ -15,24 +16,11 @@ const ContainerList = ({ containerList }: IContainerListProps) => {
         <table>
           <thead className="border">
             <tr>
-              <th className="p-2 text-center border bg-gray-700 text-white">
-                CONTAINER ID
-              </th>
-              <th className="p-2 text-center border bg-gray-700 text-white">
-                IMAGE
-              </th>
-              <th className="p-2 text-center border bg-gray-700 text-white">
-                CREATED
-              </th>
-              <th className="p-2 text-center border bg-gray-700 text-white">
-                STATUS
-              </th>
-              <th className="p-2 text-center border bg-gray-700 text-white">
-                PORTS
-              </th>
-              <th className="p-2 text-center border bg-gray-700 text-white">
-                Name
-              </th>
+              { SummaryContainerFields.map((SummaryContainerFieldItem) => (
+                <th key={SummaryContainerFieldItem} className="p-2 text-center border bg-gray-700 text-white">
+                  {SummaryContainerFieldItem}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
@@ -45,7 +33,7 @@ const ContainerList = ({ containerList }: IContainerListProps) => {
                   {containerData.Image}
                 </td>
                 <td className="p-2 text-center border">
-                  {containerData.Created}
+                  {new Date(containerData.Created).toLocaleDateString()}
                 </td>
                 <td className="p-2 text-center border">
                   {containerData.Status}
