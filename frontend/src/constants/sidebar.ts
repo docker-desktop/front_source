@@ -7,5 +7,12 @@ export interface ISidebarList {
 }
 
 export const SidebarList: ISidebarList[] = [
-	
+	{
+    content: "Container",
+    path: '/container'
+  },
+  {
+    content: 'Image',
+    path: '/image'
+  }
 ]
