@@ -1,13 +1,36 @@
+import React, { useState } from "react"
+
 import Input from "../Input"
 import Button from "../Button"
 
 import { SummaryContainerFields } from "../../constants/container"
 
 const ContainerSearchHeader = () => {
+  const [searchInpState, setSearchInpState] = useState<string>("")
+  const [searchSelectColumnState, setSearchSelectColumnState] = useState<string>("")
+
+  const handleSearchInp = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setSearchInpState(() => value)
+  }
+
+  const handleSearchSelectColumn = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target
+  
+    if (value == "") {
+      return
+    }
+
+    setSearchSelectColumnState(() => value)
+  }
+
+  const submitSearchContainerData = (e: React.MouseEvent<HTMLButtonElement>) => {
+  }
+
   return (
     <header className="flex items-center justify-start gap-4 w-full border mb-2 p-2">
       <div className="flex items-center justify-center gap-2 w-1/4">
-        <Input.Select id="search_column" name="search_column">
+        <Input.Select id="search_column" name="search_column" onChange={handleSearchSelectColumn}>
           <Input.Option value="">Choose Search Column</Input.Option>
             { SummaryContainerFields.map((SummaryContainerFieldItem) => (
               <Input.Option key={SummaryContainerFieldItem} value={SummaryContainerFieldItem}>{SummaryContainerFieldItem}</Input.Option>
@@ -15,10 +38,10 @@ const ContainerSearchHeader = () => {
         </Input.Select>
       </div>
       <div className="felx items-center justify-center w-1/4 flex-1">
-        <Input placeholder="Enter" />
+        <Input placeholder="Enter" onChange={handleSearchInp} />
       </div>
       <div>
-        <Button>
+        <Button onClick={submitSearchContainerData}>
           Search
         </Button>
       </div>
