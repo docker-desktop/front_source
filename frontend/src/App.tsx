@@ -7,7 +7,10 @@ import AppOutlet from "./components/layouts/AppOutlet";
 import MainPage from "./pages/MainPage";
 
 // Container
-import ContainerListPage from "./pages/ContainerListPage";
+import ContainerListPage from "./pages/container/ContainerListPage";
+
+// Image
+import ImageListPage from "./pages/image/ImageListPage";
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="container">
                 <Route index element={<ContainerListPage />} />
+            </Route>
+            <Route path="image">
+                <Route index element={<ImageListPage />} />
             </Route>
         </Route>
     </Routes>

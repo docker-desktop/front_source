@@ -70,6 +70,32 @@ export namespace types {
 		    return a;
 		}
 	}
+	export class ImageSummary {
+	    Id: string;
+	    RepoTags: string[];
+	    RepoDigests: string[];
+	    Created: number;
+	    Size: number;
+	    VirtualSize: number;
+	    Labels: {[key: string]: string};
+	    Containers: number;
+	
+	    static createFrom(source: any = {}) {
+	        return new ImageSummary(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.Id = source["Id"];
+	        this.RepoTags = source["RepoTags"];
+	        this.RepoDigests = source["RepoDigests"];
+	        this.Created = source["Created"];
+	        this.Size = source["Size"];
+	        this.VirtualSize = source["VirtualSize"];
+	        this.Labels = source["Labels"];
+	        this.Containers = source["Containers"];
+	    }
+	}
 
 }
 

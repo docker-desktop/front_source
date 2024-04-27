@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
-import Container from "../components/Container";
+import Container from "../../components/Container";
 
-import ContainerList from "../components/container/ContainerList";
-import ContainerSearchHeader from "../components/container/ContainerSearchHaeder";
+import ContainerList from "../../components/container/ContainerList";
+import ContainerSearchHeader from "../../components/container/ContainerSearchHaeder";
 
-import { ContainerList as ServiceContainerList } from "../../wailsjs/go/services/containerService";
-import { types } from "../../wailsjs/go/models";
+import { ContainerList as ServiceContainerList } from "../../../wailsjs/go/services/containerService";
+import { types } from "../../../wailsjs/go/models";
 
 const ContainerListPage = () => {
   const [containerDataList, setContainerDataList] = useState<

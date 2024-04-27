@@ -21,6 +21,7 @@ func main() {
 
 	app := NewApp()
 	container_service := services.NewContainerService(docker_client)
+	image_service := services.NewImageService(docker_client)
 
 	err := wails.Run(&options.App{
 		Title:            "docker-desktop",
@@ -40,6 +41,7 @@ func main() {
 		Bind: []interface{}{
 			app,
 			container_service,
+			image_service,
 		},
 		Linux: &linux.Options{
 			WebviewGpuPolicy: linux.WebviewGpuPolicyAlways,
