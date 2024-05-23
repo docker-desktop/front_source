@@ -96,6 +96,35 @@ export namespace types {
 	        this.Containers = source["Containers"];
 	    }
 	}
+	
+	export class VersionInfo {
+	    Version: string;
+	    Os: string;
+	    KernelVersion: string;
+	    GoVersion: string;
+	    GitCommit: string;
+	    Arch: string;
+	    BuildTime: string;
+	    ApiVersion: string;
+	    Experimental: boolean;
+	
+	    static createFrom(source: any = {}) {
+	        return new VersionInfo(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.Version = source["Version"];
+	        this.Os = source["Os"];
+	        this.KernelVersion = source["KernelVersion"];
+	        this.GoVersion = source["GoVersion"];
+	        this.GitCommit = source["GitCommit"];
+	        this.Arch = source["Arch"];
+	        this.BuildTime = source["BuildTime"];
+	        this.ApiVersion = source["ApiVersion"];
+	        this.Experimental = source["Experimental"];
+	    }
+	}
 
 }
 
