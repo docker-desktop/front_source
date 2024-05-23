@@ -24,8 +24,6 @@ const ImageListPage = () => {
   // Get Image Data List
   const getServiceImageList = async () => {
     await ServiceImageList().then((res) => {
-      console.log(res);
-      
       SetImageDataState(res);
     });
   };

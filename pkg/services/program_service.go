@@ -21,7 +21,7 @@ func NewProgramService(docker_client client.Client) *programService {
 	}
 }
 
-func (p *programService)DockerInfo() (types.VersionInfo, error) {
+func (p *programService) DockerInfo() (types.VersionInfo, error) {
 	docker_version, err := p.docker_client.GetVersion(*p.ctx)
 	if err != nil {
 		return types.VersionInfo{}, err
