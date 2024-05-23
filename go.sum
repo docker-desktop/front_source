@@ -3,8 +3,8 @@ github.com/bep/debounce v1.2.1/go.mod h1:H8yggRPQKLUhUoqrJC1bO2xNya7vanpDl7xR3IS
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/docker-desktop/GoDockerInfoFetcher v0.0.0-20240418121736-c4dab6ff09bb h1:Otng0zRgst4PNM/adTKStZczng+iaJGMUNhplmS6HUY=
-github.com/docker-desktop/GoDockerInfoFetcher v0.0.0-20240418121736-c4dab6ff09bb/go.mod h1:LKPZ+SE40oBxrOUi4o8NWI5tQnx/Nac7Xkbyyl7e8q0=
+github.com/docker-desktop/GoDockerInfoFetcher v0.0.0-20240517072611-16b0b479f904 h1:KF24yeE9TjtaxKPVQmLG3u4is/C04qs2D25rYTjJd+c=
+github.com/docker-desktop/GoDockerInfoFetcher v0.0.0-20240517072611-16b0b479f904/go.mod h1:LKPZ+SE40oBxrOUi4o8NWI5tQnx/Nac7Xkbyyl7e8q0=
 github.com/go-ole/go-ole v1.2.6 h1:/Fpf6oFPoeFik9ty7siob0G6Ke8QvQEuVcuChpwXzpY=
 github.com/go-ole/go-ole v1.2.6/go.mod h1:pprOEPIfldk/42T2oK7lQ4v4JSDwmV0As9GaiUsvbm0=
 github.com/godbus/dbus/v5 v5.1.0 h1:4KLkAxT3aOY8Li4FRJe/KvhoNFFxo0m6fNuFUO8QJUk=
