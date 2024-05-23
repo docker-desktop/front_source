@@ -11,7 +11,7 @@ interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
 const Tab = ({ label, children, changeTab, isActive }: TabProps) => {
   return (
     <button
-      className={`px-4 py-2 ${isActive ? 'bg-blue-500 text-white' : ''} rounded-sm`}
+      className={`px-4 py-2 ${isActive ? 'bg-gray-500 text-white' : ''} rounded-sm`}
       onClick={() => changeTab && changeTab(label)}
       type="button">
       {label}

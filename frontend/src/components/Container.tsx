@@ -1,13 +1,15 @@
-interface IContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-
+interface IContainer {
+  children: React.ReactNode
+  className?: string
+  fluid?: boolean
 }
 
-const Container = ({ children, className = '' }: IContainerProps) => {
-  return (
-    <div className={`w-full mt-12 ${className}`}>
-      {children}
-    </div>
-  )
+const Container = ({ children, fluid, className }: IContainer) => {
+  if (fluid) {
+    return <div className={`w-full px-2 ${className}`}>{children}</div>
+  }
+
+  return <div className={`container mx-auto ${className}`}>{children}</div>
 }
 
-export default Container;
+export default Container
