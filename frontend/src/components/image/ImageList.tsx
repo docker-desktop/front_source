@@ -9,6 +9,7 @@ interface IImageListProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const ImageList = ({ imageList }: IImageListProps) => {
+	console.log(imageList);
   return imageList && imageList.length > 0 ? (
     <div className="w-full mx-auto">
       <table>
@@ -17,7 +18,7 @@ const ImageList = ({ imageList }: IImageListProps) => {
             {SummaryImageFields.map((SummaryImageFieldItem) => (
               <th
                 key={SummaryImageFieldItem}
-                className="p-2 text-center border bg-gray-700 text-white"
+                className="p-2 text-center text-white bg-gray-700 border"
               >
                 {SummaryImageFieldItem}
               </th>
@@ -41,10 +42,8 @@ const ImageList = ({ imageList }: IImageListProps) => {
                 {imageData.RepoTags && imageData.RepoTags.length > 0 && imageData.RepoTags.join(", ")}
               </td>
               <td className="p-2 text-center border">
-                {new Date(imageData.Created).toLocaleDateString()}
-              </td>
-              <td className="p-2 text-center border">
-                {imageData.Size}
+								{/* docker images 커맨드로 나오는 이미지의 size를 td에 표기, MB로 */}
+								{imageData.Size && (imageData.Size / 1024 / 1024).toFixed(2)} MB
               </td>
             </tr>
           ))}

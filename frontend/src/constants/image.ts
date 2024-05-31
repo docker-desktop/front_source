@@ -8,6 +8,5 @@ export const SummaryImageFields: string[] = [
   "IMAGE ID",
   "Label",
   "TAGS",
-  "CREATED",
   "SIZE"
 ]

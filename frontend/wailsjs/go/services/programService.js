@@ -5,3 +5,7 @@
 export function DockerInfo() {
   return window['go']['services']['programService']['DockerInfo']();
 }
+
+export function ProgramInfo() {
+  return window['go']['services']['programService']['ProgramInfo']();
+}

@@ -96,6 +96,117 @@ export namespace types {
 	        this.Containers = source["Containers"];
 	    }
 	}
+	export class Info {
+	    Architecture: string;
+	    ClusterStore: string;
+	    CgroupDriver: string;
+	    Containers: number;
+	    ContainersRunning: number;
+	    ContainersStopped: number;
+	    ContainersPaused: number;
+	    CpuCfsPeriod: boolean;
+	    CpuCfsQuota: boolean;
+	    Debug: boolean;
+	    DockerRootDir: string;
+	    Driver: string;
+	    DriverStatus: string[][];
+	    ExperimentalBuild: boolean;
+	    HttpProxy: string;
+	    HttpsProxy: string;
+	    ID: string;
+	    IPv4Forwarding: boolean;
+	    Images: number;
+	    IndexServerAddress: string;
+	    InitPath: string;
+	    InitSha1: string;
+	    KernelMemory: boolean;
+	    KernelVersion: string;
+	    Labels: string[];
+	    MemTotal: number;
+	    MemoryLimit: boolean;
+	    NCPU: number;
+	    NEventsListener: number;
+	    NFd: number;
+	    NGoroutines: number;
+	    Name: string;
+	    NoProxy: string;
+	    OSType: string;
+	    OomKillDisable: boolean;
+	    OperatingSystem: string;
+	    // Go type: struct { AllowNondistributableArtifactsCIDRs []string "json:\"AllowNondistributableArtifactsCIDRs\""; AllowNondistributableArtifactsHostnames []string "json:\"AllowNondistributableArtifactsHostnames\""; InsecureRegistryCIDRs []string "json:\"InsecureRegistryCIDRs\""; IndexConfigs map[string]struct { Mirrors []string "json:\"Mirrors\""; Name string "json:\"Name\""; Official bool "json:\"Official\""; Secure bool "json:\"Secure\"" } "json:\"IndexConfigs\""; Mirrors []string "json:\"Mirrors\""; NonGlobalRegistryHostnames []string "json:\"NonGlobalRegistryHostnames\""; PermissiveHostnames []string "json:\"PermissiveHostnames\"" }
+	    RegistryConfig: any;
+	    SecurityOptions: string[];
+	    ServerVersion: string;
+	    SwapLimit: boolean;
+	    SystemTime: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new Info(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.Architecture = source["Architecture"];
+	        this.ClusterStore = source["ClusterStore"];
+	        this.CgroupDriver = source["CgroupDriver"];
+	        this.Containers = source["Containers"];
+	        this.ContainersRunning = source["ContainersRunning"];
+	        this.ContainersStopped = source["ContainersStopped"];
+	        this.ContainersPaused = source["ContainersPaused"];
+	        this.CpuCfsPeriod = source["CpuCfsPeriod"];
+	        this.CpuCfsQuota = source["CpuCfsQuota"];
+	        this.Debug = source["Debug"];
+	        this.DockerRootDir = source["DockerRootDir"];
+	        this.Driver = source["Driver"];
+	        this.DriverStatus = source["DriverStatus"];
+	        this.ExperimentalBuild = source["ExperimentalBuild"];
+	        this.HttpProxy = source["HttpProxy"];
+	        this.HttpsProxy = source["HttpsProxy"];
+	        this.ID = source["ID"];
+	        this.IPv4Forwarding = source["IPv4Forwarding"];
+	        this.Images = source["Images"];
+	        this.IndexServerAddress = source["IndexServerAddress"];
+	        this.InitPath = source["InitPath"];
+	        this.InitSha1 = source["InitSha1"];
+	        this.KernelMemory = source["KernelMemory"];
+	        this.KernelVersion = source["KernelVersion"];
+	        this.Labels = source["Labels"];
+	        this.MemTotal = source["MemTotal"];
+	        this.MemoryLimit = source["MemoryLimit"];
+	        this.NCPU = source["NCPU"];
+	        this.NEventsListener = source["NEventsListener"];
+	        this.NFd = source["NFd"];
+	        this.NGoroutines = source["NGoroutines"];
+	        this.Name = source["Name"];
+	        this.NoProxy = source["NoProxy"];
+	        this.OSType = source["OSType"];
+	        this.OomKillDisable = source["OomKillDisable"];
+	        this.OperatingSystem = source["OperatingSystem"];
+	        this.RegistryConfig = this.convertValues(source["RegistryConfig"], Object);
+	        this.SecurityOptions = source["SecurityOptions"];
+	        this.ServerVersion = source["ServerVersion"];
+	        this.SwapLimit = source["SwapLimit"];
+	        this.SystemTime = source["SystemTime"];
+	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
+	}
 	
 	export class VersionInfo {
 	    Version: string;

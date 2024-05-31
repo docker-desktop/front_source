@@ -3,3 +3,5 @@
 import {types} from '../models';
 
 export function DockerInfo():Promise<types.VersionInfo>;
+
+export function ProgramInfo():Promise<types.Info>;

@@ -17,7 +17,7 @@ const ContainerList = ({ containerList }: IContainerListProps) => {
           <thead className="border">
             <tr>
               { SummaryContainerFields.map((SummaryContainerFieldItem) => (
-                <th key={SummaryContainerFieldItem} className="p-2 text-center border bg-gray-700 text-white">
+                <th key={SummaryContainerFieldItem} className="p-2 text-center text-white bg-gray-700 border">
                   {SummaryContainerFieldItem}
                 </th>
               ))}
@@ -31,9 +31,6 @@ const ContainerList = ({ containerList }: IContainerListProps) => {
                 </td>
                 <td className="p-2 text-center border">
                   {containerData.Image}
-                </td>
-                <td className="p-2 text-center border">
-                  {new Date(containerData.Created).toLocaleDateString()}
                 </td>
                 <td className="p-2 text-center border">
                   {containerData.Status}

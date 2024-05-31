@@ -29,3 +29,12 @@ func (p *programService) DockerInfo() (types.VersionInfo, error) {
 
 	return docker_version, nil
 }
+
+func (p *programService) ProgramInfo() (types.Info, error) {
+	prg_info, err := p.docker_client.GetInfo(*p.ctx)
+	if err != nil {
+		return types.Info{}, err
+	}
+
+	return prg_info, nil
+}
