@@ -4,6 +4,8 @@ import {types} from '../models';
 
 export function ContainerList():Promise<Array<types.ContainerSummary>>;
 
+export function DeleteContainer(arg1:string):Promise<boolean>;
+
 export function StartContainer(arg1:string):Promise<void>;
 
 export function StopContainer(arg1:string):Promise<void>;

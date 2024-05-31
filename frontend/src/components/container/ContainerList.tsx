@@ -6,7 +6,7 @@ import Skeleton from "../Skeleton";
 
 import { SummaryContainerFields } from "../../constants/container";
 
-import { StartContainer, StopContainer } from "../../../wailsjs/go/services/containerService";
+import { StartContainer, StopContainer, DeleteContainer } from "../../../wailsjs/go/services/containerService";
 import { types } from "../../../wailsjs/go/models";
 
 type BtnEvent = React.MouseEvent<HTMLButtonElement>;
@@ -41,7 +41,22 @@ const ContainerList = ({ containerList, isLoading, getServiceContainerList }: IC
 		await StopContainer(containerId);
 		await getServiceContainerList();
 		return
+	}
 
+	// Delete Container 
+	const handleDeleteContainer = async (event: BtnEvent): Promise<void> => {
+		const containerId = event.currentTarget.id;
+		if (!containerId) {
+			return
+		}
+
+		const deleteState = await DeleteContainer(containerId);
+		await getServiceContainerList();
+		if (!deleteState){
+			toast.error("Failed to delete container");
+		}
+
+		return
 	}
 
 	// Get Action Element
@@ -51,13 +66,23 @@ const ContainerList = ({ containerList, isLoading, getServiceContainerList }: IC
 		switch (containerData.State) {
 			case "exited":
 				return (
-					<Button 
-						disabled={isLoading}
-						id={containerData.Id} 
-						name={containerData.State}
-						onClick={handleStartContainer}>
-							Start
-					</Button>
+					<div className="flex items-center justify-center gap-1">
+						<Button 
+							disabled={isLoading}
+							id={containerData.Id} 
+							name={containerData.State}
+							onClick={handleStartContainer}>
+								Start
+						</Button>
+						<Button 
+							variant="danger"
+							disabled={isLoading}
+							id={containerData.Id} 
+							name={containerData.State}
+							onClick={handleDeleteContainer}>
+								Delete
+						</Button>
+					</div>
 				)
 			case "running":
 				return (
