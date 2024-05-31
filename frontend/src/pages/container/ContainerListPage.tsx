@@ -24,16 +24,19 @@ const ContainerListPage = () => {
   }
 
   // Get Contianer Data List
-  const getServiceContainerList = async () => {
+  const getServiceContainerList = async (): Promise<void> => {
     await ServiceContainerList().then((res) => {
       SetContainerDataState(res)
+			return	
     });
   };
 
   return (
     <Container>
       <ContainerSearchHeader />
-      <ContainerList containerList={containerDataList} />
+      <ContainerList 
+				containerList={containerDataList} 
+				getServiceContainerList={getServiceContainerList} />
     </Container>
   );
 };

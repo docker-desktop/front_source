@@ -1,14 +1,75 @@
 import React from "react";
+
+import Button from "../Button";
 import Skeleton from "../Skeleton";
 
-import { types } from "../../../wailsjs/go/models";
 import { SummaryContainerFields } from "../../constants/container";
+
+import { StartContainer, StopContainer } from "../../../wailsjs/go/services/containerService";
+import { types } from "../../../wailsjs/go/models";
+
+type BtnEvent = React.MouseEvent<HTMLButtonElement>;
 
 interface IContainerListProps extends React.HTMLAttributes<HTMLDivElement> {
   containerList: types.ContainerSummary[]
+
+	getServiceContainerList: () => Promise<void>
 }
 
-const ContainerList = ({ containerList }: IContainerListProps) => {
+const ContainerList = ({ containerList, getServiceContainerList }: IContainerListProps) => {
+	console.log(containerList[0])
+	
+	// Start Container 
+	const handleStartContainer = async (event: BtnEvent): Promise<void> => {
+		const containerId = event.currentTarget.id;
+		if (!containerId) {
+			return
+		}
+
+		await StartContainer(containerId);
+		await getServiceContainerList();
+		return
+	}
+
+	// Stop Container 
+	const handleStopContainer = async (event: BtnEvent): Promise<void> => {
+		const containerId = event.currentTarget.id;
+		if (!containerId) {
+			return
+		}
+
+		await StopContainer(containerId);
+		await getServiceContainerList();
+		return
+
+	}
+
+	// Get Action Element
+	// CASE 1: exited: START
+	// CASE 2: running: STOP
+	const getActionElement = (containerData: types.ContainerSummary) => {
+		switch (containerData.State) {
+			case "exited":
+				return (
+					<Button 
+						id={containerData.Id} 
+						name={containerData.State}
+						onClick={handleStartContainer}>
+							Start
+					</Button>
+				)
+			case "running":
+				return (
+					<Button 
+						id={containerData.Id} 
+						name={containerData.State}
+						onClick={handleStopContainer}>
+							Stop
+					</Button>
+				)
+		}
+	}
+
   return (
     containerList &&
     containerList.length > 0 ? (
@@ -45,6 +106,9 @@ const ContainerList = ({ containerList }: IContainerListProps) => {
                 </td>
                 <td className="p-2 text-center border">
                   {containerData.Names[0]}
+                </td>
+                <td className="p-2 text-center border">
+									{getActionElement(containerData)}
                 </td>
               </tr>
             ))}

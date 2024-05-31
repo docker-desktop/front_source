@@ -3,5 +3,6 @@ export const SummaryContainerFields: string[] = [
   "IMAGE",
   "STATUS",
   "PORTS",
-  "NAME"
+  "NAME",
+	"Action",
 ]
