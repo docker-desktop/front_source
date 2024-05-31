@@ -37,14 +37,14 @@ const MainPage = () => {
 					<table className="w-full">
 						<thead className="border">
 							<tr className="border">
-								<th className="border">Architecture</th>
-								<th className="border">Images</th>
-								<th className="border">Containers</th>
-								<th className="border">Container Running</th>
-								<th className="border">Container Stopped</th>
-								<th className="border">DockerRootDir</th>
-								<th className="border">MemTotal</th>
-								<th className="border">Server Version</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">Architecture</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">Images</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">Containers</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">Container Running</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">Container Stopped</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">DockerRootDir</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">MemTotal</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">Server Version</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -72,14 +72,14 @@ const MainPage = () => {
 					<table className="w-full">
 						<thead>
 							<tr className="border">
-								<th className="border">API VERSION</th>
-								<th className="border">ARCH</th>
-								<th className="border">BUILD TIME</th>
-								<th className="border">GIT COMMIT</th>
-								<th className="border">GO VERSION</th>
-								<th className="border">KERNEL VERSION</th>
-								<th className="border">OS</th>
-								<th className="border">VERSION</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">API VERSION</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">ARCH</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">BUILD TIME</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">GIT COMMIT</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">GO VERSION</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">KERNEL VERSION</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">OS</th>
+								<th className="p-2 text-center text-white bg-gray-700 border">VERSION</th>
 							</tr>
 						</thead>
 						<tbody>

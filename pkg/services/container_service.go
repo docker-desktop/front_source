@@ -30,3 +30,24 @@ func (c *containerService) ContainerList() ([]types.ContainerSummary, error) {
 
 	return container_list, nil
 }
+
+// Start Container 
+func (c *containerService) StartContainer(container_id string) error {
+	err := c.docker_client.ContainerStartByID(*c.ctx, container_id)
+	if err != nil {
+		return err 
+	}
+
+	return nil
+}
+
+// Stop Container 
+func (c *containerService) StopContainer(container_id string) error {
+	err := c.docker_client.ContainerStopByID(*c.ctx, container_id)
+	if err != nil {
+		return err 
+	}
+
+	return nil
+}
+

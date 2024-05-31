@@ -5,3 +5,11 @@
 export function ContainerList() {
   return window['go']['services']['containerService']['ContainerList']();
 }
+
+export function StartContainer(arg1) {
+  return window['go']['services']['containerService']['StartContainer'](arg1);
+}
+
+export function StopContainer(arg1) {
+  return window['go']['services']['containerService']['StopContainer'](arg1);
+}

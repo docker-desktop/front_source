@@ -3,3 +3,7 @@
 import {types} from '../models';
 
 export function ContainerList():Promise<Array<types.ContainerSummary>>;
+
+export function StartContainer(arg1:string):Promise<void>;
+
+export function StopContainer(arg1:string):Promise<void>;
