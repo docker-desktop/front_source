@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import Container from "../../components/Container";
+import Loading from "../../components/Loading";
 
 import ContainerList from "../../components/container/ContainerList";
 import ContainerSearchHeader from "../../components/container/ContainerSearchHaeder";
@@ -9,6 +10,7 @@ import { ContainerList as ServiceContainerList } from "../../../wailsjs/go/servi
 import { types } from "../../../wailsjs/go/models";
 
 const ContainerListPage = () => {
+	const [isLoading, setIsLoading] = useState<boolean>(true);
   const [containerDataList, setContainerDataList] = useState<
     types.ContainerSummary[]
   >([]);
@@ -25,17 +27,21 @@ const ContainerListPage = () => {
 
   // Get Contianer Data List
   const getServiceContainerList = async (): Promise<void> => {
+		setIsLoading(() => true)
     await ServiceContainerList().then((res) => {
       SetContainerDataState(res)
+			setIsLoading(() => false)
 			return	
     });
   };
 
   return (
     <Container>
-      <ContainerSearchHeader />
+			<Loading.Full isLoading={isLoading} />
+			<ContainerSearchHeader />
       <ContainerList 
 				containerList={containerDataList} 
+				isLoading={isLoading}
 				getServiceContainerList={getServiceContainerList} />
     </Container>
   );

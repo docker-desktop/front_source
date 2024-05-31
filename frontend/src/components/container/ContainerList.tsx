@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 import Button from "../Button";
 import Skeleton from "../Skeleton";
@@ -12,13 +13,12 @@ type BtnEvent = React.MouseEvent<HTMLButtonElement>;
 
 interface IContainerListProps extends React.HTMLAttributes<HTMLDivElement> {
   containerList: types.ContainerSummary[]
+	isLoading: boolean
 
 	getServiceContainerList: () => Promise<void>
 }
 
-const ContainerList = ({ containerList, getServiceContainerList }: IContainerListProps) => {
-	console.log(containerList[0])
-	
+const ContainerList = ({ containerList, isLoading, getServiceContainerList }: IContainerListProps) => {
 	// Start Container 
 	const handleStartContainer = async (event: BtnEvent): Promise<void> => {
 		const containerId = event.currentTarget.id;
@@ -52,6 +52,7 @@ const ContainerList = ({ containerList, getServiceContainerList }: IContainerLis
 			case "exited":
 				return (
 					<Button 
+						disabled={isLoading}
 						id={containerData.Id} 
 						name={containerData.State}
 						onClick={handleStartContainer}>
