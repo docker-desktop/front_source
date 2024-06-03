@@ -6,11 +6,11 @@ import { SummaryImageFields } from "../../constants/image";
 
 interface IImageListProps extends React.HTMLAttributes<HTMLDivElement> {
   imageList: types.ImageSummary[];
+	isLoading: boolean
 }
 
-const ImageList = ({ imageList }: IImageListProps) => {
-	console.log(imageList);
-  return imageList && imageList.length > 0 ? (
+const ImageList = ({ imageList, isLoading }: IImageListProps) => {
+  return isLoading || imageList && imageList.length > 0 ? (
     <div className="w-full mx-auto">
       <table>
         <thead className="border">

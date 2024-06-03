@@ -30,3 +30,13 @@ func (i *imageService) ImageList() ([]types.ImageSummary, error) {
 
 	return image_list, nil
 }
+
+// Delete Container 
+func (i *imageService) DeleteImage(image_name string) bool {
+	err := i.docker_client.ImageDeleteByName(*i.ctx, image_name)
+	if err != nil {
+		return false
+	}
+
+	return true
+}
