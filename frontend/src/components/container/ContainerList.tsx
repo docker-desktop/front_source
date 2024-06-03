@@ -14,11 +14,11 @@ type BtnEvent = React.MouseEvent<HTMLButtonElement>;
 interface IContainerListProps extends React.HTMLAttributes<HTMLDivElement> {
   containerList: types.ContainerSummary[]
 	isLoading: boolean
-
+  handleLoadingState: () => void
 	getServiceContainerList: () => Promise<void>
 }
 
-const ContainerList = ({ containerList, isLoading, getServiceContainerList }: IContainerListProps) => {
+const ContainerList = ({ containerList, isLoading, handleLoadingState, getServiceContainerList }: IContainerListProps) => {
 	// Start Container 
 	const handleStartContainer = async (event: BtnEvent): Promise<void> => {
 		const containerId = event.currentTarget.id;
@@ -26,8 +26,11 @@ const ContainerList = ({ containerList, isLoading, getServiceContainerList }: IC
 			return
 		}
 
-		await StartContainer(containerId);
-		await getServiceContainerList();
+		handleLoadingState()
+		await StartContainer(containerId).then(async () => {
+			toast.success("Container started successfully");
+			await getServiceContainerList();
+		})
 		return
 	}
 
@@ -37,9 +40,14 @@ const ContainerList = ({ containerList, isLoading, getServiceContainerList }: IC
 		if (!containerId) {
 			return
 		}
-
-		await StopContainer(containerId);
-		await getServiceContainerList();
+		
+		handleLoadingState()
+		await StopContainer(containerId).then(async () => {
+			toast.success("Container stopped successfully");
+			// Wait 1Sec
+			setTimeout(() => {}, 3000);
+			await getServiceContainerList();
+		})
 		return
 	}
 
@@ -50,11 +58,13 @@ const ContainerList = ({ containerList, isLoading, getServiceContainerList }: IC
 			return
 		}
 
+		handleLoadingState()
 		const deleteState = await DeleteContainer(containerId);
 		await getServiceContainerList();
 		if (!deleteState){
 			toast.error("Failed to delete container");
 		}
+		toast.success("Container deleted successfully");
 
 		return
 	}
@@ -97,6 +107,7 @@ const ContainerList = ({ containerList, isLoading, getServiceContainerList }: IC
 	}
 
   return (
+		isLoading ||
     containerList &&
     containerList.length > 0 ? (
       <div className="w-full mx-auto">

@@ -20,6 +20,11 @@ const ContainerListPage = () => {
     getServiceContainerList();
   }, []);
 
+	// handle loading state 
+	const handleLoadingState = (): void => {
+		setIsLoading(prev => !prev)
+	}
+
   // Set ContainerDataList State Ddata Handle
   const SetContainerDataState = (contianerData: types.ContainerSummary[]): void => {
     setContainerDataList(() => contianerData)
@@ -42,6 +47,7 @@ const ContainerListPage = () => {
       <ContainerList 
 				containerList={containerDataList} 
 				isLoading={isLoading}
+				handleLoadingState={handleLoadingState}
 				getServiceContainerList={getServiceContainerList} />
     </Container>
   );

@@ -51,14 +51,11 @@ func (c *containerService) StopContainer(container_id string) error {
 	return nil
 }
 
-// Delete Container
-// TODO: IF Container is russing, it should be stopped first
-// OK# TODO: IF Container is stopped, it should be removed
 func (c *containerService) DeleteContainer(container_id string) bool {
 	err := c.docker_client.ContainerDeleteByID(*c.ctx, container_id)
 	if err != nil {
 		return false
 	}
 
-	return false
+	return true
 }
