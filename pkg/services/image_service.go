@@ -32,11 +32,24 @@ func (i *imageService) ImageList() ([]types.ImageSummary, error) {
 }
 
 // Delete Container 
-func (i *imageService) DeleteImage(image_name string) bool {
-	err := i.docker_client.ImageDeleteByName(*i.ctx, image_name)
+// TODO: IF image is used by container, it should not be deleted
+func (i *imageService) DeleteImage(image_name, image_id string) bool {
+	container_list, err := i.docker_client.ContainerList(*i.ctx)
+	if err != nil {
+		return false
+	}
+
+	for _, container := range container_list {
+		if container.ImageID == image_id {
+			return false
+		}
+	}
+
+	err = i.docker_client.ImageDeleteByName(*i.ctx, image_name)
 	if err != nil {
 		return false
 	}
 
 	return true
 }
+

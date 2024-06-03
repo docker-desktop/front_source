@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
@@ -6,8 +7,10 @@ import Loading from "../../components/Loading";
 import ImageList from "../../components/image/ImageList";
 import ImageSearchHeader from "../../components/image/ImageSearchHeader";
 
-import { ImageList as ServiceImageList } from "../../../wailsjs/go/services/imageService";
+import { ImageList as ServiceImageList, DeleteImage } from "../../../wailsjs/go/services/imageService";
 import { types } from "../../../wailsjs/go/models";
+
+type BtnEvent = React.MouseEvent<HTMLButtonElement>;
 
 const ImageListPage = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -32,13 +35,34 @@ const ImageListPage = () => {
     });
   };
 
+	// delete Image 
+	const handleDeleteImage = async (event: BtnEvent): Promise<void> => {
+		const imageName = event.currentTarget.id;
+		const imageID = event.currentTarget.name;
+		if (!imageName || imageName === "" || imageName === undefined || !imageID || imageID === "" || imageID === undefined) {
+			return;
+		}
+
+		await DeleteImage(imageName, imageID).then(async (res) => {
+			if (!res) {
+				toast.error("Failed to delete container");
+				return;
+			}
+			toast.success("Container deleted successfully");
+			await getServiceImageList();
+			return
+		})
+		
+	}
+
   return (
 		<Container>
 			<Loading.Full isLoading={isLoading} />
 			<ImageSearchHeader />
 			<ImageList 
 				imageList={imageDataList}
-				isLoading={isLoading} />
+				isLoading={isLoading} 
+				handleDeleteImage={handleDeleteImage} />
 		</Container>
 	);
 };
