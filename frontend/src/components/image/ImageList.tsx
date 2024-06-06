@@ -1,15 +1,21 @@
 import React from "react";
 import Skeleton from "../Skeleton";
+import Button from "../Button";
 
 import { types } from "../../../wailsjs/go/models";
 import { SummaryImageFields } from "../../constants/image";
 
+type BtnEvent = React.MouseEvent<HTMLButtonElement>;
+
 interface IImageListProps extends React.HTMLAttributes<HTMLDivElement> {
   imageList: types.ImageSummary[];
+	isLoading: boolean
+
+	handleDeleteImage: (event: BtnEvent) => void;
 }
 
-const ImageList = ({ imageList }: IImageListProps) => {
-  return imageList && imageList.length > 0 ? (
+const ImageList = ({ imageList, isLoading, handleDeleteImage }: IImageListProps) => {
+  return isLoading || imageList && imageList.length > 0 ? (
     <div className="w-full mx-auto">
       <table>
         <thead className="border">
@@ -17,7 +23,7 @@ const ImageList = ({ imageList }: IImageListProps) => {
             {SummaryImageFields.map((SummaryImageFieldItem) => (
               <th
                 key={SummaryImageFieldItem}
-                className="p-2 text-center border bg-gray-700 text-white"
+                className="p-2 text-center text-white bg-gray-700 border"
               >
                 {SummaryImageFieldItem}
               </th>
@@ -41,11 +47,19 @@ const ImageList = ({ imageList }: IImageListProps) => {
                 {imageData.RepoTags && imageData.RepoTags.length > 0 && imageData.RepoTags.join(", ")}
               </td>
               <td className="p-2 text-center border">
-                {new Date(imageData.Created).toLocaleDateString()}
+								{/* docker images 커맨드로 나오는 이미지의 size를 td에 표기, MB로 */}
+								{imageData.Size && (imageData.Size / 1024 / 1024).toFixed(2)} MB
               </td>
               <td className="p-2 text-center border">
-                {imageData.Size}
-              </td>
+								<Button
+									id={imageData.RepoTags[0]}
+									name={imageData.Id}
+									onClick={handleDeleteImage}
+									variant="danger"
+								>
+								Delete
+								</Button>
+							</td>
             </tr>
           ))}
         </tbody>

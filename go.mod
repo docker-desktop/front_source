@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.22.0
 
 require (
-	github.com/docker-desktop/GoDockerInfoFetcher v0.0.0-20240418121736-c4dab6ff09bb
+	github.com/docker-desktop/GoDockerInfoFetcher v0.0.0-20240517072611-16b0b479f904
 	github.com/wailsapp/wails/v2 v2.8.1
 )
 

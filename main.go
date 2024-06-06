@@ -22,15 +22,14 @@ func main() {
 	app := NewApp()
 	container_service := services.NewContainerService(docker_client)
 	image_service := services.NewImageService(docker_client)
+	program_service := services.NewProgramService(docker_client)
 
 	err := wails.Run(&options.App{
 		Title:            "docker-desktop",
-		Width:            1024,
+		Width:						1400,
 		Height:           768,
 		MinWidth:         1024,
 		MinHeight:        768,
-		MaxWidth:         1024,
-		MaxHeight:        768,
 		Fullscreen:       false,
 		BackgroundColour: &options.RGBA{R: 249, G: 249, B: 250, A: 255},
 		AssetServer: &assetserver.Options{
@@ -42,6 +41,7 @@ func main() {
 			app,
 			container_service,
 			image_service,
+			program_service,
 		},
 		Linux: &linux.Options{
 			WebviewGpuPolicy: linux.WebviewGpuPolicyAlways,
