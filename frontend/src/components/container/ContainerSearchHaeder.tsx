@@ -3,45 +3,30 @@ import React, { useState } from "react"
 import Input from "../Input"
 import Button from "../Button"
 
-import { SummaryContainerFields } from "../../constants/container"
+import { SummanryContainerSearchField } from "../../constants/container"
 
-const ContainerSearchHeader = () => {
-  const [searchInpState, setSearchInpState] = useState<string>("")
-  const [searchSelectColumnState, setSearchSelectColumnState] = useState<string>("")
+interface IProps {
+	handleSearchInp: (e: React.ChangeEvent<HTMLInputElement>) => void
+	handleSearchColumn: (e: React.ChangeEvent<HTMLSelectElement>) => void
+	handleSearchContainer: () => Promise<void>
+}
 
-  const handleSearchInp = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target
-    setSearchInpState(() => value)
-  }
-
-  const handleSearchSelectColumn = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target
-  
-    if (value == "") {
-      return
-    }
-
-    setSearchSelectColumnState(() => value)
-  }
-
-  const submitSearchContainerData = (e: React.MouseEvent<HTMLButtonElement>) => {
-  }
-
+const ContainerSearchHeader = ({handleSearchInp, handleSearchColumn, handleSearchContainer}: IProps) => {
   return (
-    <header className="flex items-center justify-start gap-4 w-full border mb-2 p-2">
-      <div className="flex items-center justify-center gap-2 w-1/4">
-        <Input.Select id="search_column" name="search_column" onChange={handleSearchSelectColumn}>
+    <header className="flex items-center justify-start w-full p-2 mb-2 border gap-4">
+      <div className="flex items-center justify-center w-1/4 gap-2">
+        <Input.Select id="search_column" name="search_column" onChange={handleSearchColumn}>
           <Input.Option value="">Choose Search Column</Input.Option>
-            { SummaryContainerFields.map((SummaryContainerFieldItem) => (
+            {SummanryContainerSearchField.map((SummaryContainerFieldItem) => (
               <Input.Option key={SummaryContainerFieldItem} value={SummaryContainerFieldItem}>{SummaryContainerFieldItem}</Input.Option>
             ))}
         </Input.Select>
       </div>
-      <div className="felx items-center justify-center w-1/4 flex-1">
+      <div className="items-center justify-center flex-1 w-1/4 felx">
         <Input placeholder="Enter" onChange={handleSearchInp} />
       </div>
       <div>
-        <Button onClick={submitSearchContainerData}>
+        <Button onClick={handleSearchContainer}>
           Search
         </Button>
       </div>

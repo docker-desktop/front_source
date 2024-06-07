@@ -6,3 +6,9 @@ export const SummaryContainerFields: string[] = [
   "NAME",
 	"Action",
 ]
+
+export const SummanryContainerSearchField: string[] = [
+	"Id",
+	"Image",
+	"Names"
+]

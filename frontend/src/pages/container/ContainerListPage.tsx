@@ -14,10 +14,13 @@ import { types } from "../../../wailsjs/go/models";
 type BtnEvent = React.MouseEvent<HTMLButtonElement>;
 
 const ContainerListPage = () => {
-	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [isLoading, setIsLoading] = useState<boolean>(true); // Loading 
   const [containerDataList, setContainerDataList] = useState<
     types.ContainerSummary[]
-  >([]);
+  >([]); // Container Data List 
+	const [searchInpState, setSearchInpState] = useState<string>("")
+	const [searchColumnState, setSearchColumnState] = useState<string>("")
+
 
   // 페이지 랜더링 최초 시에 컨테이너 목록 조회
   useEffect(() => {
@@ -94,18 +97,65 @@ const ContainerListPage = () => {
 		return
 	}
 
+	const handleSearchInp = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+		const { value } = event.target;
+		setSearchInpState(() => value)
+
+		if (!value) {
+			await getServiceContainerList();
+		}
+	}
+
+	const handleSearchColumn = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+		const { value } = event.target;
+		setSearchColumnState(() => value)
+	}
+
+	const handleSearchContainer = async (): Promise<void> => {
+		if (!searchInpState || !searchColumnState) {
+			toast.error("Please enter the search column and search value");
+			await getServiceContainerList();
+			return
+		}
+		setIsLoading(() => true)
+
+		switch (searchColumnState) {
+			case "Id":
+				const idData = containerDataList.filter((containerData) => containerData.Id.includes(searchInpState))
+				setContainerDataList(() => idData)
+				setIsLoading(() => false)
+				break
+			case "Names":
+				const namesData = containerDataList.filter((containerData) => containerData.Names[0].includes(searchColumnState))
+				setContainerDataList(() => namesData)
+				setIsLoading(() => false)
+				break
+			case "Image":
+				const imageData = containerDataList.filter((containerData) => containerData.Image.includes(searchInpState))
+				setContainerDataList(() => imageData)
+				setIsLoading(() => false)
+				break
+		}
+		return
+	}
 
   return (
     <Container>
-			<Loading.Full isLoading={isLoading} />
-			<ContainerSearchHeader />
+			<Loading.Full 
+				isLoading={isLoading} 
+			/>
+			<ContainerSearchHeader 
+				handleSearchInp={handleSearchInp}
+				handleSearchColumn={handleSearchColumn}
+				handleSearchContainer={handleSearchContainer}
+			/>
       <ContainerList 
 				containerList={containerDataList} 
 				isLoading={isLoading} 
 				handleStartContainer={handleStartContainer}
 				handleStopContainer={handleStopContainer}
 				handleDeleteContainer={handleDeleteContainer}
-				/>
+			/>
     </Container>
   );
 };
