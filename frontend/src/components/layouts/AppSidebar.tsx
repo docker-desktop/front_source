@@ -10,7 +10,7 @@ const AppSidebar = () => {
     <div className="hidden lg:flex fixed left-0 top-0 w-40 h-full p-2 flex-col items-center bg-gray-700 text-white">
       <div className="text-center mb-4">
         <h1 className="text-2xl font-bold">
-          <Link to="/">Application</Link>
+          <Link to="/">Docker Desktop</Link>
         </h1>
       </div>
       <div className="text-center flex-1 w-full">
