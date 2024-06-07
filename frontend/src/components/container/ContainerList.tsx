@@ -1,74 +1,22 @@
 import React from "react";
-import { toast } from "react-toastify";
 
 import Button from "../Button";
 import Skeleton from "../Skeleton";
 
 import { SummaryContainerFields } from "../../constants/container";
 
-import { StartContainer, StopContainer, DeleteContainer } from "../../../wailsjs/go/services/containerService";
 import { types } from "../../../wailsjs/go/models";
-
-type BtnEvent = React.MouseEvent<HTMLButtonElement>;
 
 interface IContainerListProps extends React.HTMLAttributes<HTMLDivElement> {
   containerList: types.ContainerSummary[]
 	isLoading: boolean
-  handleLoadingState: () => void
-	getServiceContainerList: () => Promise<void>
+
+	handleStartContainer: (event: React.MouseEvent<HTMLButtonElement>) => void
+	handleStopContainer: (event: React.MouseEvent<HTMLButtonElement>) => void
+	handleDeleteContainer: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const ContainerList = ({ containerList, isLoading, handleLoadingState, getServiceContainerList }: IContainerListProps) => {
-	// Start Container 
-	const handleStartContainer = async (event: BtnEvent): Promise<void> => {
-		const containerId = event.currentTarget.id;
-		if (!containerId) {
-			return
-		}
-
-		handleLoadingState()
-		await StartContainer(containerId).then(async () => {
-			toast.success("Container started successfully");
-			await getServiceContainerList();
-		})
-		return
-	}
-
-	// Stop Container 
-	const handleStopContainer = async (event: BtnEvent): Promise<void> => {
-		const containerId = event.currentTarget.id;
-		if (!containerId) {
-			return
-		}
-		
-		handleLoadingState()
-		await StopContainer(containerId).then(async () => {
-			toast.success("Container stopped successfully");
-			// Wait 1Sec
-			setTimeout(() => {}, 3000);
-			await getServiceContainerList();
-		})
-		return
-	}
-
-	// Delete Container 
-	const handleDeleteContainer = async (event: BtnEvent): Promise<void> => {
-		const containerId = event.currentTarget.id;
-		if (!containerId) {
-			return
-		}
-
-		handleLoadingState()
-		const deleteState = await DeleteContainer(containerId);
-		await getServiceContainerList();
-		if (!deleteState){
-			toast.error("Failed to delete container");
-		}
-		toast.success("Container deleted successfully");
-
-		return
-	}
-
+const ContainerList = ({ containerList, isLoading, handleStartContainer, handleStopContainer, handleDeleteContainer }: IContainerListProps) => {
 	// Get Action Element
 	// CASE 1: exited: START
 	// CASE 2: running: STOP
