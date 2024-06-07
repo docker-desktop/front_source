@@ -11,3 +11,8 @@ export const SummaryImageFields: string[] = [
   "SIZE",
 	"ACTION",
 ]
+
+export const SummanryImageSearchField: string[] = [
+	"Id",
+	"Tag",
+]
